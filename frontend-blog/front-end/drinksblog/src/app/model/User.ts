@@ -6,5 +6,5 @@ export class User{
   public photo: string
   public username: string
   public userType: string
-  public post: Post
+  public post: Post[]
 }
