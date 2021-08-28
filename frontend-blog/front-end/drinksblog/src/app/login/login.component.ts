@@ -1,3 +1,5 @@
+import { AuthService } from './../service/auth.service';
+import { UserLogin } from './../model/UserLogin';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  userLogin: UserLogin = new UserLogin
+  constructor(
+    private auth: AuthService
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    window.scroll(0,0)
+  }
+
+  login(){
+    this.auth.login(this.userLogin).subscribe((resp: UserLogin)=>{
+      this.userLogin = resp
+      
+    })
   }
 
 }
