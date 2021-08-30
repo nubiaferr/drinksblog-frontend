@@ -33,6 +33,9 @@ export class SigninComponent implements OnInit {
 
   signin(){
     this.user.userType = this.typeUs
+    if(this.user.password.length < 8){
+      alert("Minimum of 8 characters required.")
+    }
 
     if(this.user.password != this.confirmPw){
       alert("Passwords don't match")
@@ -40,7 +43,7 @@ export class SigninComponent implements OnInit {
       this.authService.signin(this.user).subscribe((resp: User) => {
         this.user = resp
         this.router.navigate(['/login'])
-        alert("You're signed in!")
+        alert("You're in!")
       })
     }
   }
