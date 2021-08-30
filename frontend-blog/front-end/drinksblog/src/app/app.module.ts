@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ThemeComponent } from './theme/theme.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     FooterComponent,
     LoginComponent,
     SigninComponent,
-    HomepageComponent
+    HomepageComponent,
+    ThemeComponent
   ],
   imports: [
     BrowserModule,
