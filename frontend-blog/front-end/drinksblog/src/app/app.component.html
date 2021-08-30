@@ -1,2 +1,4 @@
+<app-menu *ngIf='auth.loggedin()'></app-menu>
 <router-outlet></router-outlet>
+<app-footer *ngIf='auth.loggedin()'></app-footer>
 

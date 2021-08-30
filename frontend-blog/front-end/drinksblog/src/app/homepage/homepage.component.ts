@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { environment } from './../../environments/environment.prod';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
+  if(environment.token == ''){
+    //alert('Oops! You have to log in again!')
+    this.router.navigate(['/login'])
+  }
   }
 
 }

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment.prod';
 import { UserLogin } from './../model/UserLogin';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,4 +21,14 @@ export class AuthService {
   signin(user: User): Observable<User>{
     return this.http.post<User>('https://nubiaferrdrinks.herokuapp.com/users/signin', user)
   }
+
+  loggedin(){
+    let ok = false
+    if (environment.token != ''){
+      ok = true
+    }
+    return ok
+  }
+
+
 }
