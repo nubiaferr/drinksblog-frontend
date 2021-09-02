@@ -40,7 +40,6 @@ export class ThemeComponent implements OnInit {
       this.findAllTheme()
       this.theme = new Theme()
     })
-
   }
 
 

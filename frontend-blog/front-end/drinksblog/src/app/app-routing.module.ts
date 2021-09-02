@@ -1,3 +1,5 @@
+import { ThemeDeleteComponent } from './delete/theme-delete/theme-delete.component';
+import { ThemeEditComponent } from './edit/theme-edit/theme-edit.component';
 import { ThemeComponent } from './theme/theme.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
@@ -10,7 +12,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signin', component: SigninComponent},
   {path: 'homepage', component: HomepageComponent},
-  {path: 'theme', component: ThemeComponent}
+  {path: 'theme', component: ThemeComponent},
+  {path: 'theme-edit/:id', component: ThemeEditComponent},
+  {path: 'theme-delete/:id', component: ThemeDeleteComponent}
 
 ];
 

@@ -21,9 +21,20 @@ export class ThemeService {
     return this.http.get<Theme[]>('https://nubiaferrdrinks.herokuapp.com/theme', this.token)
   }
 
+  getByIdTheme(id: number): Observable<Theme>{
+    return this.http.get<Theme>(`https://nubiaferrdrinks.herokuapp.com/theme/${id}`, this.token)
+  }
+
   postTheme(theme: Theme): Observable<Theme>{
     return this.http.post<Theme>('https://nubiaferrdrinks.herokuapp.com/theme', theme, this.token)
   }
 
-  
+  putTheme(theme: Theme): Observable <Theme>{
+    return this.http.put<Theme>('https://nubiaferrdrinks.herokuapp.com/theme', theme, this.token)
+  }
+
+  deleteTheme(id: number){
+    return this.http.delete(`https://nubiaferrdrinks.herokuapp.com/theme/${id}`, this.token)
+  }
+
 }

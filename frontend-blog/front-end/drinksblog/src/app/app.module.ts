@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ThemeComponent } from './theme/theme.component';
+import { ThemeEditComponent } from './edit/theme-edit/theme-edit.component';
+import { ThemeDeleteComponent } from './delete/theme-delete/theme-delete.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { ThemeComponent } from './theme/theme.component';
     LoginComponent,
     SigninComponent,
     HomepageComponent,
-    ThemeComponent
+    ThemeComponent,
+    ThemeEditComponent,
+    ThemeDeleteComponent
   ],
   imports: [
     BrowserModule,
