@@ -1,6 +1,6 @@
 import { environment } from './../../environments/environment.prod';
 import { UserLogin } from './../model/UserLogin';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../model/User';
@@ -14,12 +14,17 @@ export class AuthService {
     private http: HttpClient
     ) { }
 
+
   login(userLogin: UserLogin): Observable<UserLogin>{
     return this.http.post<UserLogin>('https://nubiaferrdrinks.herokuapp.com/users/login', userLogin)
   }
 
   signin(user: User): Observable<User>{
     return this.http.post<User>('https://nubiaferrdrinks.herokuapp.com/users/signin', user)
+  }
+
+  getByIdUser(id: number): Observable<User>{
+    return this.http.get<User>(`https://nubiaferrdrinks.herokuapp.com/users/${id}`)
   }
 
   loggedin(){
