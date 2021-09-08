@@ -5,6 +5,7 @@ import { ThemeService } from './../../service/theme.service';
 import { PostService } from './../../service/post.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AlertsService } from './../../service/alerts.service';
 
 @Component({
   selector: 'app-post-delete',
@@ -19,7 +20,8 @@ export class PostDeleteComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private alert: AlertsService
   ) { }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class PostDeleteComponent implements OnInit {
 
   delete(){
     this.postService.deletePost(this.idPost).subscribe(() => {
-      alert('Post deleted!')
+      this.alert.showAlertSuccess('Post deleted!')
       this.router.navigate(['/homepage'])
     })
   }

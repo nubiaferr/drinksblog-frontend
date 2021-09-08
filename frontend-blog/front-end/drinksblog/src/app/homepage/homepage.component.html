@@ -14,7 +14,7 @@
       <div class="row d-flex justify-content-center mt-3 mb-5">
         <div class="col-md-6">
           <button class="btn btn-light mr-2 text-secondary" data-toggle="modal" data-target="#new-post">New post</button>
-          <a href="#posts" class="btn btn-outline-light">All posts</a>
+          <a href="#posts" class="btn btn-outline-light all-posts">All posts</a>
         </div>
       </div>
 
@@ -49,8 +49,18 @@
     <!-- All posts -->
     <div class="tab-pane fade show active" id="allposts" role="tabpanel" aria-labelledby="nav-allposts-tab">
 
+      <!-- Pesquisar -->
+      <div class="row d-flex justify-content-center mt-5 mb-5">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input type="text" class="form-control" id="title" placeholder="Search for a post's title" [(ngModel)]='titlePost' (keyup) = 'findByTitlePost()'>
+          </div>
+        </div>
+      </div>
+
       <div class="card-columns">
-        <div class="card text-center" *ngFor='let item of postList'>
+        <div class="card text-center"
+        *ngFor='let item of postList | orderBy : key : reverse'>
           <div class="card-body">
             <h5 class="card-title m-0">{{item.title}}</h5>
             <small class="text-muted">Theme: {{item.theme.title}}</small>
@@ -61,9 +71,9 @@
             <p class="card-text"><small class="text-muted">
               By: {{item.user.name}}
             </small></p>
-             <!-- Edit/delete -->
-             <a [routerLink]="['/post-edit', item.id]" class="text-info mr-3" href="#">Edit</a>
-             <a [routerLink]="['/post-delete', item.id]" class="text-danger" href="#">Delete</a>
+              <!-- Edit/delete -->
+              <a [routerLink]="['/post-edit', item.id]" class="text-info mr-3" href="#">Edit</a>
+              <a [routerLink]="['/post-delete', item.id]" class="text-danger" href="#">Delete</a>
           </div>
         </div>
       </div>
@@ -73,7 +83,8 @@
     <div class="tab-pane fade" id="myposts" role="tabpanel" aria-labelledby="nav-myposts-tab">
 
       <div class="card-columns">
-        <div class="card text-center" *ngFor='let item of user.post'>
+        <div class="card text-center"
+        *ngFor='let item of user.post | orderBy : key : reverse'>
           <div class="card-body">
             <h5 class="card-title m-0">{{item.title}}</h5>
             <small class="text-muted">Theme: {{item.theme.title}}</small>
@@ -94,7 +105,17 @@
     <!-- Posts by theme -->
     <div class="tab-pane fade" id="poststheme" role="tabpanel" aria-labelledby="nav-poststheme-tab">
 
-      <div class="card-columns" *ngFor='let theme of themeList'>
+            <!-- Pesquisar -->
+            <div class="row d-flex justify-content-center mt-5 mb-5">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="title" placeholder="Search for a theme" [(ngModel)]='titleTheme' (keyup) = 'findByTitleTheme()'>
+                </div>
+              </div>
+            </div>
+
+      <div class="card-columns"
+      *ngFor='let theme of themeList | orderBy : key : reverse'>
         <div class="card text-center" *ngFor='let item of theme.post'>
           <div class="card-body">
             <h6 class="card-title m-0">{{theme.title}}</h6>

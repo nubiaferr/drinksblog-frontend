@@ -3,6 +3,7 @@ import { AuthService } from './../service/auth.service';
 import { UserLogin } from './../model/UserLogin';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertsService } from './../service/alerts.service'
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userLogin: UserLogin = new UserLogin
-  
+
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private alert: AlertsService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
       environment.name = this.userLogin.name
       environment.photo = this.userLogin.photo
       environment.id = this.userLogin.id
+      environment.userType = this.userLogin.userType
 
       /*console.log(environment.token)
       console.log(environment.name)
@@ -40,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/homepage'])
     }, error => {
       if(error.status == 500){
-        alert('Username/password: incorrect')
+        this.alert.showAlertDanger('Username/password: incorrect')
       }
     })
   }

@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment.prod';
 import { Component, OnInit } from '@angular/core';
 import { Theme } from '../model/Theme';
 import { ThemeService } from '../service/theme.service';
+import { AlertsService } from './../service/alerts.service'
 
 @Component({
   selector: 'app-theme',
@@ -16,7 +17,8 @@ export class ThemeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private themeService : ThemeService
+    private themeService : ThemeService,
+    private alert: AlertsService
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,12 @@ export class ThemeComponent implements OnInit {
       //alert('Oops! You have to log in again!')
       this.router.navigate(['/login'])
     }
+
+    if(environment.userType != 'adm'){
+      this.alert.showAlertInfo('Adms only')
+      this.router.navigate(['/homepage'])
+    }
+
     this.findAllTheme()
   }
 
@@ -36,7 +44,7 @@ export class ThemeComponent implements OnInit {
   signItUp(){
     this.themeService.postTheme(this.theme).subscribe((resp: Theme) => {
       this.theme = resp
-      alert('Theme signed up')
+      this.alert.showAlertSuccess('Theme signed up')
       this.findAllTheme()
       this.theme = new Theme()
     })

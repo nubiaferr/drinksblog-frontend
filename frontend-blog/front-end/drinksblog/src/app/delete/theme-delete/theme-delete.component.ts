@@ -3,6 +3,7 @@ import { ThemeService } from './../../service/theme.service';
 import { Component, OnInit } from '@angular/core';
 import { Theme } from 'src/app/model/Theme';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertsService } from './../../service/alerts.service';
 
 @Component({
   selector: 'app-theme-delete',
@@ -17,7 +18,8 @@ export class ThemeDeleteComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alert: AlertsService
     ) { }
 
   ngOnInit(){
@@ -37,7 +39,7 @@ export class ThemeDeleteComponent implements OnInit {
 
   delete(){
     this.themeService.deleteTheme(this.idTheme).subscribe(() =>{
-      alert('Theme deleted!')
+      this.alert.showAlertSuccess('Theme deleted!')
       this.router.navigate(['/theme'])
     })
   }

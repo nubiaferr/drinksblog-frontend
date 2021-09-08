@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -17,6 +18,8 @@ import { ThemeDeleteComponent } from './delete/theme-delete/theme-delete.compone
 import { PostEditComponent } from './edit/post-edit/post-edit.component';
 import { PostDeleteComponent } from './delete/post-delete/post-delete.component';
 import { UserEditComponent } from './edit/user-edit/user-edit.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 
 @NgModule({
@@ -32,13 +35,16 @@ import { UserEditComponent } from './edit/user-edit/user-edit.component';
     ThemeDeleteComponent,
     PostEditComponent,
     PostDeleteComponent,
-    UserEditComponent
+    UserEditComponent,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot(),
+    OrderModule
   ],
   providers: [
     {provide: LocationStrategy,

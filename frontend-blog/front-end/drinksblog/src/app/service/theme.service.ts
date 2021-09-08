@@ -25,6 +25,10 @@ export class ThemeService {
     return this.http.get<Theme>(`https://nubiaferrdrinks.herokuapp.com/theme/${id}`, this.token)
   }
 
+  getByTitleTheme(title: string) : Observable<Theme[]>{
+    return this.http.get<Theme[]>(`https://nubiaferrdrinks.herokuapp.com/theme/title/${title}`, this.token)
+  }
+
   postTheme(theme: Theme): Observable<Theme>{
     return this.http.post<Theme>('https://nubiaferrdrinks.herokuapp.com/theme', theme, this.token)
   }

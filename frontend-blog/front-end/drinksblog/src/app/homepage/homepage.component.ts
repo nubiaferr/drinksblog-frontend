@@ -1,4 +1,5 @@
 import { AuthService } from './../service/auth.service';
+import { AlertsService } from './../service/alerts.service'
 import { User } from './../model/User';
 import { HttpClient } from '@angular/common/http';
 import { Theme } from './../model/Theme';
@@ -19,19 +20,25 @@ export class HomepageComponent implements OnInit {
 
   post: Post = new Post()
   postList: Post[]
+  titlePost: string
 
   themeList: Theme[]
   idTheme: number
   theme: Theme = new Theme()
+  titleTheme: string
 
   user: User = new User()
   idUser = environment.id
+
+  key = 'date'
+  reverse = true
 
   constructor(
     private router: Router,
     private postService: PostService,
     private themeService: ThemeService,
-    private authService: AuthService
+    public authService: AuthService,
+    private alert: AlertsService
   ) { }
 
   ngOnInit() {
@@ -53,7 +60,6 @@ export class HomepageComponent implements OnInit {
     })
   }
 
-  //pega o id do tema
   findByIdTheme(){
     this.themeService.getByIdTheme(this.idTheme).subscribe((resp: Theme) => {
       this.theme = resp
@@ -67,9 +73,9 @@ export class HomepageComponent implements OnInit {
   }
 
   findByIdUser(){
+    console.log('worked')
     this.authService.getByIdUser(this.idUser).subscribe((resp: User) => {
       this.user = resp
-      console.log('clicou')
     })
   }
 
@@ -83,9 +89,30 @@ export class HomepageComponent implements OnInit {
 
     this.postService.postPost(this.post).subscribe((resp: Post) => {
       this.post = resp
-      alert('Posted!')
+      this.alert.showAlertSuccess('Posted!')
       //this.post = new Post()
       this.getAllPosts()
+    })
+  }
+
+  findByTitlePost(){
+
+    if(this.titlePost == ''){
+      this.getAllPosts()
+    }
+
+    this.postService.getByTitlePost(this.titlePost).subscribe((resp: Post []) => {
+      this.postList = resp
+    })
+  }
+
+  findByTitleTheme(){
+    if(this.titleTheme == ''){
+      this.getAllPosts()
+    }
+
+    this.themeService.getByTitleTheme(this.titleTheme).subscribe((resp: Theme []) => {
+      this.themeList = resp
     })
   }
 

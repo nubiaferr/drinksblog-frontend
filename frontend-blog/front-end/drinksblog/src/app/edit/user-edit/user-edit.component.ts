@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './../../service/auth.service';
 import { User } from './../../model/User';
 import { Component, OnInit } from '@angular/core';
+import { AlertsService } from './../../service/alerts.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -19,7 +20,8 @@ export class UserEditComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alert: AlertsService
   ) { }
 
   ngOnInit(){
@@ -50,16 +52,16 @@ export class UserEditComponent implements OnInit {
   update(){
     this.user.userType = this.typeUs
     if(this.user.password.length < 8){
-      alert("Minimum of 8 characters required.")
+      this.alert.showAlertDanger('Minimum of 8 characters required.')
     }
 
     if(this.user.password != this.confirmPw){
-      alert("Passwords don't match")
+      this.alert.showAlertDanger("Passwords don't match")
     } else {
       this.authService.signin(this.user).subscribe((resp: User) => {
         this.user = resp
         this.router.navigate(['/login'])
-        alert("You're updated! Login again")
+        this.alert.showAlertSuccess("You're updated! Login again")
         environment.token = ''
         environment.name = ''
         environment.id = 0

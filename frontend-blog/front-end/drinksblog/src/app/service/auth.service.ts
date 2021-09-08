@@ -35,5 +35,14 @@ export class AuthService {
     return ok
   }
 
+  adm(){
+    let ok = true
+    if (environment.userType != 'adm'){
+      ok = false
+    }
+    return ok
+
+  }
+
 
 }

@@ -26,6 +26,10 @@ export class PostService {
     return this.http.get<Post>(`https://nubiaferrdrinks.herokuapp.com/posts/${id}`, this.token)
   }
 
+  getByTitlePost(title: string) : Observable<Post[]>{
+    return this.http.get<Post[]>(`https://nubiaferrdrinks.herokuapp.com/posts/title/${title}`, this.token)
+  }
+
   postPost(post: Post) : Observable<Post>{
     return this.http.post<Post>('https://nubiaferrdrinks.herokuapp.com/posts', post, this.token)
   }
